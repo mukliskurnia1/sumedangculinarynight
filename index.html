@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumedang Culinary Night 2026 - Pendaftaran Tenant</title>
-    <!-- Import FontAwesome untuk Ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -15,6 +14,7 @@
             --text-light: #e2e8f0;
             --text-muted: #94a3b8;
             --btn-hover: #e0a700;
+            --success-color: #10b981;
         }
 
         body {
@@ -22,18 +22,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-light);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            scroll-behavior: smooth;
         }
 
-        /* Hero Section di GitHub Pages */
         .hero {
             background-image: linear-gradient(to bottom, rgba(10, 15, 29, 0.8), var(--bg-dark)), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             text-align: center;
-            padding: 50px 20px 20px;
+            padding: 70px 20px 30px;
             border-bottom: 3px solid var(--accent-gold);
             position: relative;
         }
@@ -41,68 +38,210 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; height: 25px;
+            top: 0; left: 0; right: 0; height: 30px;
             background-image: radial-gradient(circle at 20px 0, var(--accent-gold) 6px, transparent 8px);
-            background-size: 40px 25px;
+            background-size: 40px 30px;
             filter: drop-shadow(0 5px 10px var(--accent-glow));
         }
 
-        .logo-img { max-width: 160px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(0,0,0,0.8)); }
-        .hero h1 { margin: 0; font-size: 1.8em; color: var(--accent-gold); text-shadow: 2px 2px 4px #000; text-transform: uppercase; letter-spacing: 1px;}
-        .hero p { font-size: 0.95em; color: #fff; text-shadow: 1px 1px 3px #000; margin-top: 8px; }
+        .logo-img { max-width: 200px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(0,0,0,0.8)); }
+        .hero h1 { margin: 0; font-size: 2.2em; color: var(--accent-gold); text-shadow: 2px 2px 4px #000; text-transform: uppercase; letter-spacing: 1px;}
+        .hero p { font-size: 1.1em; color: #fff; text-shadow: 1px 1px 3px #000; margin-top: 10px; }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
 
-        /* Container Iframe */
-        .iframe-container {
-            flex: 1;
-            width: 100%;
-            max-width: 850px;
-            margin: 20px auto;
-            padding: 0 10px;
-            box-sizing: border-box;
+        .info-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; }
+        @media (min-width: 600px) { .info-grid { grid-template-columns: 1fr 1fr; } }
+        
+        .info-card { background-color: var(--bg-card); padding: 25px; border-radius: 12px; border-top: 3px solid var(--accent-gold); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .info-card h3 { color: var(--accent-gold); margin-top: 0; font-size: 1.2em; border-bottom: 1px solid #2a3b5c; padding-bottom: 10px; }
+        .info-card ul { padding-left: 20px; margin-bottom: 0; color: var(--text-light); line-height: 1.6;}
+        .info-card li { margin-bottom: 8px; }
+
+        #registration-section { background-color: var(--bg-card); padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); margin-bottom: 40px;}
+
+        .step-indicator { display: flex; justify-content: space-between; margin-bottom: 30px; border-bottom: 1px solid #2a3b5c; padding-bottom: 10px; }
+        .step-indicator span { color: var(--text-muted); font-weight: bold; font-size: 0.95em; }
+        .step-indicator span.active { color: var(--accent-gold); border-bottom: 3px solid var(--accent-gold); padding-bottom: 8px; }
+
+        .form-step { display: none; }
+        .form-step.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; color: var(--accent-gold); }
+        input, select, textarea {
+            width: 100%; padding: 12px; margin-bottom: 22px;
+            border: 1px solid #3a506b; border-radius: 8px;
+            background-color: var(--bg-dark); color: white;
+            box-sizing: border-box; font-family: inherit; transition: 0.3s;
         }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 8px var(--accent-glow); }
+        
+        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; background-color: #0d1527; padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent-gold);}
+        .checkbox-group input { width: auto; margin-top: 2px; transform: scale(1.2); }
+        .checkbox-group label { font-weight: normal; font-size: 0.9em; color: var(--text-light); margin-bottom: 0;}
 
-        .responsive-iframe {
-            width: 100%;
-            height: 750px; /* Tinggi awal iframe, bisa disesuaikan */
-            border: 2px solid #2a3b5c;
-            border-radius: 15px;
-            background-color: var(--bg-card);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-        }
+        .file-info { font-size: 0.85em; color: #a0aec0; margin-top: -15px; margin-bottom: 20px; display: block; font-style: italic;}
 
-        /* Footer */
-        footer { background-color: #060913; padding: 25px 20px; text-align: center; border-top: 1px solid #1a2642; }
-        footer h4 { margin-top: 0; color: var(--accent-gold); margin-bottom: 15px; font-size: 1em;}
-        .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .btn-group { display: flex; justify-content: space-between; gap: 15px; }
+        button { flex: 1; padding: 14px; font-weight: bold; font-size: 1.05em; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; text-transform: uppercase;}
+        .btn-prev { background-color: #3a506b; color: white; }
+        .btn-prev:hover { background-color: #2a3b5c; }
+        .btn-next, .btn-submit { background-color: var(--accent-gold); color: #000; box-shadow: 0 4px 10px var(--accent-glow);}
+        .btn-next:hover, .btn-submit:hover { background-color: var(--btn-hover); transform: translateY(-2px); }
+        
+        #loading-screen { display: none; text-align: center; padding: 20px; color: var(--accent-gold); font-weight: bold; font-size: 1.1em;}
+
+        footer { background-color: #060913; padding: 30px 20px; text-align: center; border-top: 1px solid #1a2642; }
+        footer h4 { margin-top: 0; color: var(--accent-gold); margin-bottom: 20px; font-size: 1.1em;}
+        .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
         .social-links a { 
-            color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 6px; 
-            background-color: #141e3a; padding: 8px 16px; border-radius: 30px; transition: 0.3s; font-size: 0.85em;
+            color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 8px; 
+            background-color: #141e3a; padding: 10px 20px; border-radius: 30px; transition: 0.3s; font-size: 0.9em;
         }
         .social-links a:hover { background-color: var(--accent-gold); color: #000; }
-        .social-links i { font-size: 1.1em; }
+        .social-links i { font-size: 1.2em; }
+
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85); z-index: 9999;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content {
+            background-color: var(--bg-card); padding: 40px 30px; border-radius: 15px;
+            text-align: center; max-width: 400px; width: 100%; position: relative;
+            border-top: 5px solid var(--success-color); box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+        .modal-icon { font-size: 4em; color: var(--success-color); margin-bottom: 15px; }
+        .modal-content h2 { margin: 0 0 15px; color: var(--text-light); }
+        .modal-content p { color: var(--text-muted); line-height: 1.5; margin-bottom: 25px; }
+        .modal-content p strong { color: var(--accent-gold); }
+        .btn-wa-modal {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background-color: #25D366; color: #fff; padding: 12px 25px; border-radius: 30px;
+            text-decoration: none; font-weight: bold; width: 100%; box-sizing: border-box; margin-bottom: 15px; transition: 0.3s;
+        }
+        .btn-wa-modal:hover { background-color: #1ebc5a; transform: translateY(-2px); }
+        .btn-close-modal { background: none; border: 1px solid #3a506b; color: var(--text-light); padding: 10px; width: 100%; border-radius: 30px; cursor: pointer; transition: 0.3s;}
+        .btn-close-modal:hover { background-color: #3a506b; }
     </style>
 </head>
 <body>
 
-    <!-- Header / Hero Ringkas -->
     <header class="hero">
         <img src="https://placehold.co/400x200/0a0f1d/ffb703?text=LOGO+SCN+2026" alt="Logo SCN 2026" class="logo-img">
         <h1>Sumedang Culinary Night</h1>
-        <p><i class="far fa-calendar-alt"></i> 25 - 27 September 2026 | <i class="fas fa-map-marker-alt"></i> Griya Plaza Sumedang</p>
+        <p><i class="far fa-calendar-alt"></i> 25 - 27 September 2026<br><i class="fas fa-map-marker-alt"></i> Area Takumi Lantai 2, Griya Plaza Sumedang</p>
     </header>
 
-    <!-- Area Iframe yang memuat Google Apps Script Web App Anda -->
-    <div class="iframe-container">
-        <iframe src="https://script.google.com/macros/s/AKfycbz0w8QUKDcLZfKGbcNdNn7l8k-LzueSmhTRdJTuIDHQ8nEyycAZUDoR1AeZE84Ck74u/exec" 
-                class="responsive-iframe" 
-                title="Pendaftaran SCN 2026"
-                scrolling="auto">
-        </iframe>
+    <div class="container">
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-bullhorn"></i> Kenapa Harus Bergabung?</h3>
+                <ul>
+                    <li>Promosi lebih luas ke ribuan pengunjung</li>
+                    <li>Mendapatkan pelanggan baru</li>
+                    <li>Meningkatkan omzet penjualan</li>
+                    <li><strong style="color: var(--accent-gold);">Gratis Biaya Tenant</strong> (Kuota Terbatas!)</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-clipboard-check"></i> Kriteria Utama UMKM</h3>
+                <ul>
+                    <li>Diutamakan UMKM asal Kabupaten Sumedang</li>
+                    <li>Produk makanan/minuman khas atau kekinian</li>
+                    <li>Siap menjaga kebersihan area & makanan</li>
+                    <li>Wajib mencantumkan harga produk secara jelas</li>
+                </ul>
+            </div>
+        </div>
+
+        <section id="registration-section">
+            <div class="step-indicator">
+                <span id="nav-step1" class="active">1. Profil</span>
+                <span id="nav-step2">2. Produk</span>
+                <span id="nav-step3">3. Validasi</span>
+            </div>
+
+            <form id="formPendaftaran">
+                <div class="form-step active" id="step1">
+                    <label>Nama UMKM / Tenant *</label>
+                    <input type="text" id="namaUmkm" required placeholder="Cth: Tahu Gejrot Mang Udin">
+
+                    <label>Nama Pemilik *</label>
+                    <input type="text" id="namaPemilik" required placeholder="Sesuai KTP">
+
+                    <label>Nomor WhatsApp Aktif *</label>
+                    <input type="number" id="noWa" required placeholder="Cth: 08123456789">
+
+                    <label>Alamat Usaha *</label>
+                    <textarea id="alamat" rows="2" required placeholder="Alamat lengkap produksi/usaha"></textarea>
+
+                    <label>Kategori Produk *</label>
+                    <select id="kategori" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Makanan Khas Sumedang">Makanan Khas Sumedang</option>
+                        <option value="Street Food & Jajanan">Street Food & Jajanan</option>
+                        <option value="Minuman Tradisional/Kekinian">Minuman Tradisional / Kekinian</option>
+                        <option value="Dessert, Bakery & Camilan">Dessert, Bakery & Camilan</option>
+                    </select>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn-next" onclick="nextStep(1, 2)">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-step" id="step2">
+                    <label>Deskripsi Menu Unggulan *</label>
+                    <textarea id="deskripsi" rows="3" required placeholder="Sebutkan cita rasa dan menu andalan yang akan dijual"></textarea>
+
+                    <label>Range Harga Produk *</label>
+                    <input type="text" id="harga" required placeholder="Cth: Rp 10.000 - Rp 25.000">
+
+                    <label>Upload Foto Produk (Maks 3 Foto) *</label>
+                    <input type="file" id="fotoUpload" accept="image/*" multiple capture="environment" required>
+                    <span class="file-info" id="fotoInfo">Format: JPG/PNG. Bisa pilih dari galeri atau jepret langsung.</span>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn-prev" onclick="prevStep(2, 1)"><i class="fas fa-arrow-left"></i> Kembali</button>
+                        <button type="button" class="btn-next" onclick="nextStep(2, 3)">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-step" id="step3">
+                    <label>Status Legalitas Usaha (NIB / PIRT)</label>
+                    <select id="legalitas" required>
+                        <option value="Belum Ada">Belum Ada</option>
+                        <option value="Sedang Diurus">Sedang Diurus</option>
+                        <option value="Sudah Lengkap (Ada NIB/PIRT)">Sudah Lengkap (Menjadi Prioritas)</option>
+                    </select>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="syarat1" required>
+                        <label for="syarat1">Saya berkomitmen menjaga kebersihan booth, membuang sampah pada tempatnya, dan menjaga higienitas makanan.</label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="syarat2" required>
+                        <label for="syarat2">Saya bersedia mengikuti jadwal (25-27 Sept 2026) secara penuh dan mentaati aturan panitia.</label>
+                    </div>
+
+                    <div class="btn-group" id="btn-action-group">
+                        <button type="button" class="btn-prev" onclick="prevStep(3, 2)"><i class="fas fa-arrow-left"></i> Kembali</button>
+                        <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Kirim Pendaftaran</button>
+                    </div>
+                    
+                    <div id="loading-screen">
+                        <i class="fas fa-spinner fa-spin fa-2x"></i>
+                        <p>Mengunggah foto dan mengirim data...<br><span style="font-size:0.85em; color:var(--text-muted);">Mohon jangan tutup halaman ini.</span></p>
+                    </div>
+                </div>
+            </form>
+        </section>
     </div>
 
-    <!-- Footer Resmi -->
     <footer>
-        <h4>Info & Pendaftaran Panitia</h4>
+        <h4>Info & Pendaftaran</h4>
         <div class="social-links">
             <a href="https://wa.me/6282240810896" target="_blank"><i class="fab fa-whatsapp"></i> 0822-4081-0896</a>
             <a href="https://www.instagram.com/griya.sumedang" target="_blank"><i class="fab fa-instagram"></i> griya.sumedang</a>
@@ -111,5 +250,108 @@
         </div>
     </footer>
 
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fas fa-check-circle modal-icon" style="font-size: 4em; color: var(--success-color); margin-bottom: 15px;"></i>
+            <h2>Pendaftaran Berhasil!</h2>
+            <p>Mohon tunggu kabar dari panitia maksimal <strong>3 hari kerja</strong> untuk proses kurasi.</p>
+            <a href="https://wa.me/6282240810896" class="btn-wa-modal" target="_blank"><i class="fab fa-whatsapp"></i> Hubungi Panitia</a>
+            <button class="btn-close-modal" onclick="closeModal()">Tutup Halaman</button>
+        </div>
+    </div>
+
+    <script>
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbz0w8QUKDcLZfKGbcNdNn7l8k-LzueSmhTRdJTuIDHQ8nEyycAZUDoR1AeZE84Ck74u/exec";
+        let arrayFotoBase64 = [];
+
+        document.getElementById('fotoUpload').addEventListener('change', function(event) {
+            arrayFotoBase64 = []; 
+            const files = event.target.files;
+            const infoText = document.getElementById('fotoInfo');
+            
+            if(files.length > 3) {
+                alert("Maksimal 3 foto. Silakan pilih ulang.");
+                this.value = '';
+                infoText.innerText = "Format: JPG/PNG. Bisa pilih dari galeri atau jepret langsung.";
+                return;
+            }
+
+            infoText.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Memproses ${files.length} foto...`;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Data = e.target.result.split(',')[1];
+                    arrayFotoBase64.push({ mimeType: file.type, base64: base64Data });
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            setTimeout(() => { infoText.innerHTML = `<i class="fas fa-check-circle"></i> ${files.length} foto siap diunggah.`; }, 500);
+        });
+
+        function validateStep(step) {
+            const currentDiv = document.getElementById('step' + step);
+            const inputs = currentDiv.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.checkValidity()) { input.reportValidity(); isValid = false; }
+            });
+            return isValid;
+        }
+
+        function nextStep(current, next) {
+            if (validateStep(current)) {
+                document.getElementById('step' + current).classList.remove('active');
+                document.getElementById('step' + next).classList.add('active');
+                document.getElementById('nav-step' + current).classList.remove('active');
+                document.getElementById('nav-step' + next).classList.add('active');
+            }
+        }
+
+        function prevStep(current, prev) {
+            document.getElementById('step' + current).classList.remove('active');
+            document.getElementById('step' + prev).classList.add('active');
+            document.getElementById('nav-step' + current).classList.remove('active');
+            document.getElementById('nav-step' + prev).classList.add('active');
+        }
+
+        function openModal() { document.getElementById('successModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('successModal').style.display = 'none'; location.reload(); }
+
+        document.getElementById('formPendaftaran').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('btn-action-group').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+
+            const dataPayload = {
+                namaUmkm: document.getElementById('namaUmkm').value,
+                namaPemilik: document.getElementById('namaPemilik').value,
+                noWa: document.getElementById('noWa').value,
+                alamat: document.getElementById('alamat').value,
+                kategori: document.getElementById('kategori').value,
+                deskripsi: document.getElementById('deskripsi').value,
+                harga: document.getElementById('harga').value,
+                legalitas: document.getElementById('legalitas').value,
+                fotoArray: arrayFotoBase64 
+            };
+
+            // Menggunakan fetch ke Web App URL (Mendukung lintas domain langsung dari GitHub Pages)
+            fetch(GAS_URL, {
+                method: "POST",
+                mode: "no-cors", // Diperlukan untuk Google Apps Script Web App post request
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dataPayload)
+            }).then(() => {
+                document.getElementById('btn-action-group').style.display = 'flex';
+                document.getElementById('loading-screen').style.display = 'none';
+                openModal();
+            }).catch(error => {
+                document.getElementById('btn-action-group').style.display = 'flex';
+                document.getElementById('loading-screen').style.display = 'none';
+                alert('Terjadi kesalahan jaringan: ' + error.message);
+            });
+        });
+    </script>
 </body>
 </html>
