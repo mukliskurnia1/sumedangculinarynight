@@ -3,113 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumedang Culinary Night 2026 - Pendaftaran Tenant</title>
-    <!-- Import FontAwesome untuk Ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Sumedang Funtastic Walk 2026</title>
+    <link rel="icon" href="https://res.cloudinary.com/dvvjbnjzd/image/upload/v1781416074/header_14062026_a8zpnh.jpg" type="image/png">
     <style>
-        :root {
-            --bg-dark: #0a0f1d;
-            --bg-card: #141e3a;
-            --accent-gold: #f5b700;
-            --accent-glow: #ffc80080;
-            --text-light: #e2e8f0;
-            --text-muted: #94a3b8;
-            --btn-hover: #e0a700;
+        /* Menghilangkan margin dan scrollbar bawaan agar iframe tampil penuh 100% di layar hp/laptop */
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            overflow: hidden; 
+            background-color: #f4f7f6; 
         }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            display: block; 
         }
-
-        /* Hero Section di GitHub Pages */
-        .hero {
-            background-image: linear-gradient(to bottom, rgba(10, 15, 29, 0.8), var(--bg-dark)), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            text-align: center;
-            padding: 50px 20px 20px;
-            border-bottom: 3px solid var(--accent-gold);
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 25px;
-            background-image: radial-gradient(circle at 20px 0, var(--accent-gold) 6px, transparent 8px);
-            background-size: 40px 25px;
-            filter: drop-shadow(0 5px 10px var(--accent-glow));
-        }
-
-        .logo-img { max-width: 160px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(0,0,0,0.8)); }
-        .hero h1 { margin: 0; font-size: 1.8em; color: var(--accent-gold); text-shadow: 2px 2px 4px #000; text-transform: uppercase; letter-spacing: 1px;}
-        .hero p { font-size: 0.95em; color: #fff; text-shadow: 1px 1px 3px #000; margin-top: 8px; }
-
-        /* Container Iframe */
-        .iframe-container {
-            flex: 1;
-            width: 100%;
-            max-width: 850px;
-            margin: 20px auto;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
-        .responsive-iframe {
-            width: 100%;
-            height: 750px; /* Tinggi awal iframe, bisa disesuaikan */
-            border: 2px solid #2a3b5c;
-            border-radius: 15px;
-            background-color: var(--bg-card);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-        }
-
-        /* Footer */
-        footer { background-color: #060913; padding: 25px 20px; text-align: center; border-top: 1px solid #1a2642; }
-        footer h4 { margin-top: 0; color: var(--accent-gold); margin-bottom: 15px; font-size: 1em;}
-        .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-        .social-links a { 
-            color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 6px; 
-            background-color: #141e3a; padding: 8px 16px; border-radius: 30px; transition: 0.3s; font-size: 0.85em;
-        }
-        .social-links a:hover { background-color: var(--accent-gold); color: #000; }
-        .social-links i { font-size: 1.1em; }
-    </style>
+  </style>
 </head>
 <body>
 
-    <!-- Header / Hero Ringkas -->
-    <header class="hero">
-        <img src="https://placehold.co/400x200/0a0f1d/ffb703?text=LOGO+SCN+2026" alt="Logo SCN 2026" class="logo-img">
-        <h1>Sumedang Culinary Night</h1>
-        <p><i class="far fa-calendar-alt"></i> 25 - 27 September 2026 | <i class="fas fa-map-marker-alt"></i> Griya Plaza Sumedang</p>
-    </header>
+    <iframe id="appFrame" src=""></iframe>
 
-    <!-- Area Iframe yang memuat Google Apps Script Web App Anda -->
-    <div class="iframe-container">
-        <iframe src="https://script.google.com/macros/s/AKfycbz0w8QUKDcLZfKGbcNdNn7l8k-LzueSmhTRdJTuIDHQ8nEyycAZUDoR1AeZE84Ck74u/exec" 
-                class="responsive-iframe" 
-                title="Pendaftaran SCN 2026"
-                scrolling="auto">
-        </iframe>
-    </div>
+    <script>
+        // URL Google Apps Script Utama
+        var googleScriptUrl = "https://script.google.com/macros/s/AKfycbz0w8QUKDcLZfKGbcNdNn7l8k-LzueSmhTRdJTuIDHQ8nEyycAZUDoR1AeZE84Ck74u/exec";
 
-    <!-- Footer Resmi -->
-    <footer>
-        <h4>Info & Pendaftaran Panitia</h4>
-        <div class="social-links">
-            <a href="https://wa.me/6282240810896" target="_blank"><i class="fab fa-whatsapp"></i> 0822-4081-0896</a>
-            <a href="https://www.instagram.com/griya.sumedang" target="_blank"><i class="fab fa-instagram"></i> griya.sumedang</a>
-            <a href="https://www.tiktok.com/@griya_sumedang" target="_blank"><i class="fab fa-tiktok"></i> griya_sumedang</a>
-            <a href="https://www.facebook.com/GriyaPlazaSumedang" target="_blank"><i class="fab fa-facebook"></i> Griya Plaza Sumedang</a>
-        </div>
-    </footer>
+        // Menangkap parameter dari domain utama (Misal: ?page=surat_kuasa atau ?page=susulan)
+        var currentParams = window.location.search || "";
+
+        // Penggabungan URL yang aman agar parameter tidak rusak saat dimuat oleh iframe
+        var finalUrl = googleScriptUrl + currentParams;
+
+        // Memasukkan URL final ke dalam src iframe
+        document.getElementById("appFrame").src = finalUrl;
+    </script>
 
 </body>
 </html>
